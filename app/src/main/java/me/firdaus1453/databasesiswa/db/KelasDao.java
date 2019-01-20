@@ -17,12 +17,12 @@ import me.firdaus1453.databasesiswa.model.KelasModel;
 public interface KelasDao {
 
     // Mengambil data
-    @Query("SELECT * FROM KELAS ORDER BY nama_kelas DESC")
+    @Query("SELECT * FROM KELAS ORDER BY nama_kelas ASC")
     List<KelasModel> select();
 
     // Memasukkan data
     @Insert
-    void insert(List<KelasModel> kelasModels);
+    void insert(KelasModel kelasModel);
 
     // Menghapus data
     @Delete

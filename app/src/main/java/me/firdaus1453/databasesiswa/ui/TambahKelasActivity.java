@@ -55,9 +55,6 @@ public class TambahKelasActivity extends AppCompatActivity {
 
         clearData();
 
-        Snackbar.make(btnSimpan, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-
         Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
 
         finish();
@@ -71,7 +68,7 @@ public class TambahKelasActivity extends AppCompatActivity {
     private void saveData() {
 
         // Membuat variable List kelasModels
-        List<KelasModel> kelasModels = new ArrayList<>();
+//        List<KelasModel> kelasModels = new ArrayList<>();
 
         // Membuat object KelasModel untuk menampung data
         KelasModel kelasModel = new KelasModel();
@@ -81,10 +78,10 @@ public class TambahKelasActivity extends AppCompatActivity {
         kelasModel.setNama_wali(namaWali);
 
         // Memasukkan data yang sudah terkumpul di dalam KelasModel ke dalam List kelasModels
-        kelasModels.add(kelasModel);
+//        kelasModels.add(kelasModel);
 
         // Perintah untuk melakukan operasi Insert menggunakan siswaDatabase
-        siswaDatabase.kelasDao().insert(kelasModels);
+        siswaDatabase.kelasDao().insert(kelasModel);
     }
 
     private void getData() {

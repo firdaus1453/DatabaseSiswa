@@ -97,17 +97,36 @@ public class KelasAdapter extends RecyclerView.Adapter<KelasAdapter.ViewHolder> 
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.delete:
-                                // Melakukan operasi delete data
-                                siswaDatabase.kelasDao().delete(kelasModel);
 
-                                // Menghapus data yang telash di hapus pada List
-                                kelasModelList.remove(position);
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                                alertDialogBuilder.setMessage("Are you sure delete " + kelasModel.getNama_kelas() +" ?");
+                                alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        // Melakukan operasi delete data
+                                        siswaDatabase.kelasDao().delete(kelasModel);
 
-                                // Memberitahu bahwa data sudah hilang
-                                notifyItemRemoved(position);
-                                notifyItemRangeChanged(0, kelasModelList.size());
+                                        // Menghapus data yang telash di hapus pada List
+                                        kelasModelList.remove(position);
 
-                                Toast.makeText(context, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                                        // Memberitahu bahwa data sudah hilang
+                                        notifyItemRemoved(position);
+                                        notifyItemRangeChanged(0, kelasModelList.size());
+
+                                        Toast.makeText(context, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
+
                                 break;
                             case R.id.edit:
                                 // Membuat object bundle
