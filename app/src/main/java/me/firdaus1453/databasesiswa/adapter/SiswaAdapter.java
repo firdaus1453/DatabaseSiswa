@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,9 +51,9 @@ public class SiswaAdapter extends RecyclerView.Adapter<SiswaAdapter.ViewHolder> 
 
         // Mengambil huruf pertama
         String nama = siswaModel.getNama_siswa();
-        if (!nama.isEmpty()){
+        if (!nama.isEmpty()) {
             firstName = nama.substring(0, 1);
-        }else {
+        } else {
             firstName = " ";
         }
 
@@ -74,6 +75,8 @@ public class SiswaAdapter extends RecyclerView.Adapter<SiswaAdapter.ViewHolder> 
         ImageView imgView;
         @BindView(R.id.txt_name_siswa)
         TextView txtNameSiswa;
+        @BindView(R.id.btnDelete)
+        ImageButton btnDelete;
 
         public ViewHolder(View itemView) {
             super(itemView);

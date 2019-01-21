@@ -158,10 +158,6 @@ public class KelasAdapter extends RecyclerView.Adapter<KelasAdapter.ViewHolder> 
                         return true;
                     }
                 });
-
-
-
-
             }
         });
 

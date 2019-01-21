@@ -35,12 +35,13 @@ public class TambahSiswaActivity extends AppCompatActivity {
     Button btnSimpan;
     @BindView(R.id.radio_jenis_kelamin)
     RadioGroup radioJenisKelaminGroup;
-    RadioButton radioJenisKelaminButton;
 
     private SiswaDatabase siswaDatabase;
 
     private int id_kelas;
     private String namaSiswa, asal, umur, jenis_kelamin, email;
+    private boolean empty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,50 +49,57 @@ public class TambahSiswaActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setTitle("Add Siswa");
-        id_kelas = getIntent().getIntExtra(Constant.KEY_ID_KELAS,0);
+        id_kelas = getIntent().getIntExtra(Constant.KEY_ID_KELAS, 0);
 
         siswaDatabase = SiswaDatabase.createDatabase(this);
     }
 
     @OnClick(R.id.btnSimpan)
     public void onViewClicked() {
-        getData();
+        // Memastikan semuanya terisi
+        cekData();
 
-        saveData();
-
-        clearData();
-
-        Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
-
-        finish();
+        if(!empty){
+            saveData();
+            clearData();
+            Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
+            finish();
+        }else {
+            Toast.makeText(this, "Masih ada kolom yang kosong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void clearData() {
-        edtAsal.setText("");
-        edtEmail.setText("");
         edtNamaSiswa.setText("");
         edtUmur.setText("");
+        edtAsal.setText("");
+        edtEmail.setText("");
         radioJenisKelaminGroup.clearCheck();
     }
 
     private void saveData() {
+        // Membuat penampung dengan membaut object SiswaModel
         SiswaModel siswaModel = new SiswaModel();
 
+        // kita masukkan data ke dalam siswaModel
         siswaModel.setId_kelas(id_kelas);
         siswaModel.setNama_siswa(namaSiswa);
         siswaModel.setAsal(asal);
         siswaModel.setUmur(umur);
-        siswaModel.setEmail(email);
         siswaModel.setJenis_kelamin(jenis_kelamin);
+        siswaModel.setEmail(email);
 
+        // Kita lakukan operasi insert
         siswaDatabase.kelasDao().insertSiswa(siswaModel);
     }
 
-    private void getData() {
+    private void cekData() {
         namaSiswa = edtNamaSiswa.getText().toString();
         asal = edtAsal.getText().toString();
         umur = edtUmur.getText().toString();
         email = edtEmail.getText().toString();
+
+        empty = namaSiswa.isEmpty() || asal.isEmpty() || umur.isEmpty() || email.isEmpty() || jenis_kelamin.isEmpty();
     }
 
     @OnClick({R.id.radio_laki, R.id.radio_perempuan})
