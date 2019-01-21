@@ -37,4 +37,10 @@ dependencies {
     /* Room */
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+
+    // Circle image
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    // TextDrawable
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }

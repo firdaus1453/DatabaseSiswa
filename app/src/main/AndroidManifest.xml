@@ -19,8 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.TambahKelasActivity" android:parentActivityName=".ui.MainActivity"/>
-        <activity android:name=".ui.UpdateKelasActivity" android:parentActivityName=".ui.MainActivity"></activity>
+        <activity
+            android:name=".ui.TambahKelasActivity"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity
+            android:name=".ui.UpdateKelasActivity"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity android:name=".ui.siswa.MainSiswaActivity"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity android:name=".ui.siswa.TambahSiswaActivity"/>
+        <activity android:name=".ui.siswa.UpdateSiswaActivity"></activity>
     </application>
 
 </manifest>

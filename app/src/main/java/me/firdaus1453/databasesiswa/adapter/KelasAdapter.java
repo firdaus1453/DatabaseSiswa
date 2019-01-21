@@ -17,6 +17,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+
 import java.util.List;
 import java.util.Random;
 
@@ -27,6 +29,7 @@ import me.firdaus1453.databasesiswa.db.Constant;
 import me.firdaus1453.databasesiswa.db.SiswaDatabase;
 import me.firdaus1453.databasesiswa.model.KelasModel;
 import me.firdaus1453.databasesiswa.ui.UpdateKelasActivity;
+import me.firdaus1453.databasesiswa.ui.siswa.MainSiswaActivity;
 
 /**
  * Created by firdaus1453 on 1/17/2019.
@@ -58,21 +61,32 @@ public class KelasAdapter extends RecyclerView.Adapter<KelasAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         // Memindahkan data di dalam list dengan index position ke dalam KelasModel
         final KelasModel kelasModel = kelasModelList.get(position);
         // Menampilkan data ke layar
         holder.tvNamaWali.setText(kelasModel.getNama_wali());
         holder.tvNamaKelas.setText(kelasModel.getNama_kelas());
 
-        // kita buat variable random
-        Random random = new Random();
-        // membuat color Argb alpha red green blue
-        int color = Color.argb(255, random.nextInt(255), random.nextInt(255),
-                random.nextInt(255));
+        ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
+        // generate random color
+        int color = generator.getRandomColor();
 
         // mesetting color background cardview
         holder.cvKelas.setCardBackgroundColor(color);
+
+        // Onlick pada itemview
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bundle = new Bundle();
+
+                bundle.putInt(Constant.KEY_ID_KELAS, kelasModel.getId_kelas());
+                context.startActivity(new Intent(context, MainSiswaActivity.class).putExtras(bundle));
+            }
+        });
+
 
         // Membuat onclick icon overflow
         holder.overflow.setOnClickListener(new View.OnClickListener() {
